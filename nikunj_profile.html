@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikunj G. — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:           #0e0d12;
+    --bg-2:         #13111a;
+    --bg-3:         #181620;
+    --surface:      #1e1b28;
+    --surface-2:    #252233;
+    --purple:       #9b6dff;
+    --purple-light: #b794ff;
+    --purple-dim:   #7c52d6;
+    --purple-glow:  rgba(155,109,255,0.18);
+    --off-white:    #f0ecff;
+    --text-body:    #c8c0e0;
+    --text-muted:   #8878aa;
+    --border:       rgba(155,109,255,0.14);
+    --border-2:     rgba(155,109,255,0.22);
+    --shadow:       rgba(0,0,0,0.45);
+    --shadow-p:     rgba(155,109,255,0.20);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--off-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(14,13,18,0.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--off-white);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--purple); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--off-white); }
+  .nav-cta {
+    background: var(--purple) !important;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    transition: background 0.2s, box-shadow 0.2s !important;
+    box-shadow: 0 0 18px var(--shadow-p);
+  }
+  .nav-cta:hover { background: var(--purple-light) !important; color: #fff !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(155,109,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155,109,255,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 100%);
+  }
+  .hero-glow {
+    position: absolute;
+    top: -280px; left: 50%;
+    transform: translateX(-50%);
+    width: 1000px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(155,109,255,0.14) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute;
+    bottom: -100px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse at center, rgba(155,109,255,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--purple);
+    margin-bottom: 28px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--purple);
+    opacity: 0.7;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--purple);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { box-shadow: 0 0 4px var(--purple); opacity: 1; }
+    50% { box-shadow: 0 0 12px var(--purple); opacity: 0.7; }
+  }
+  .hero-terminal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    width: fit-content;
+  }
+  .terminal-dots {
+    display: flex; gap: 5px; margin-right: 4px;
+  }
+  .terminal-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .terminal-dots .d1 { background: #ff5f56; }
+  .terminal-dots .d2 { background: #ffbd2e; }
+  .terminal-dots .d3 { background: #27c93f; }
+  .hero-terminal .prompt { color: var(--purple); }
+  .hero-terminal .cmd { color: var(--off-white); }
+  .cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--purple);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--off-white);
+  }
+  .hero-name .highlight {
+    background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple) 50%, var(--purple-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    color: var(--text-body);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+  }
+  .hero-title strong { color: var(--off-white); font-weight: 600; }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 44px;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: rgba(155,109,255,0.05);
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .tag:hover { border-color: var(--border-2); color: var(--off-white); background: rgba(155,109,255,0.10); }
+  .tag.active {
+    border-color: rgba(155,109,255,0.38);
+    color: var(--purple-light);
+    background: rgba(155,109,255,0.12);
+    font-weight: 500;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--purple);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    box-shadow: 0 4px 24px var(--shadow-p);
+  }
+  .btn-primary:hover {
+    background: var(--purple-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 36px rgba(155,109,255,0.35);
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--off-white);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1.5px solid var(--border-2);
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--purple);
+    background: rgba(155,109,255,0.08);
+    transform: translateY(-2px);
+  }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: center;
+    background: var(--bg-2);
+    gap: 0;
+  }
+  .stat {
+    text-align: center;
+    padding: 0 56px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--off-white);
+    letter-spacing: -0.04em;
+    display: block;
+  }
+  .stat-number span { color: var(--purple); }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 48px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--purple);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    display: block;
+    flex: 1;
+    max-width: 48px;
+    height: 1px;
+    background: var(--purple);
+    opacity: 0.35;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    line-height: 1.1;
+    color: var(--off-white);
+  }
+  .section-sub {
+    color: var(--text-body);
+    font-size: 1rem;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 18px;
+    font-size: 0.975rem;
+  }
+  .about-text p strong { color: var(--off-white); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 16px var(--shadow);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .skill-group:hover {
+    border-color: var(--border-2);
+    box-shadow: 0 4px 24px var(--shadow-p);
+  }
+  .skill-group-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    margin-bottom: 12px;
+  }
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-pill {
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: rgba(155,109,255,0.09);
+    color: var(--purple-light);
+    border: 1px solid rgba(155,109,255,0.18);
+  }
+
+  /* ── PORTFOLIO ── */
+  #portfolio { background: var(--bg-2); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: 0 2px 16px var(--shadow);
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(155,109,255,0.35);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px var(--shadow-p);
+  }
+  .project-card:hover .card-arrow { opacity: 1; transform: translate(2px,-2px); }
+  .card-preview {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-preview-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
+  }
+  .card-preview-url {
+    position: absolute;
+    bottom: 10px; left: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.60);
+  }
+  .card-body { padding: 24px; flex: 1; }
+  .card-category {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .cat-saas    { background: rgba(155,109,255,0.12); color: var(--purple-light); border: 1px solid rgba(155,109,255,0.22); }
+  .cat-ai      { background: rgba(183,148,255,0.10); color: #c4a0ff;             border: 1px solid rgba(183,148,255,0.20); }
+  .cat-ecomm   { background: rgba(100,160,255,0.10); color: #7eb8ff;             border: 1px solid rgba(100,160,255,0.20); }
+  .cat-b2b     { background: rgba(255,190,90,0.10);  color: #ffd080;             border: 1px solid rgba(255,190,90,0.20); }
+  .cat-health  { background: rgba(80,200,160,0.10);  color: #70ddb0;             border: 1px solid rgba(80,200,160,0.20); }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--off-white);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-arrow {
+    font-size: 1rem;
+    color: var(--purple);
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--text-body);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .card-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .tech-tag {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(155,109,255,0.08);
+    color: var(--purple);
+    border: 1px solid rgba(155,109,255,0.16);
+  }
+  .video-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 450px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+}
+
+.video-wrapper video{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.video-badge{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(14,13,18,0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--purple-light);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width:768px){
+    .video-wrapper{
+        min-height: 320px;
+    }
+}
+  /* ── UPWORK ── */
+  #upwork { background: var(--bg); }
+  .upwork-card {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border-2);
+    border-radius: 22px;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    box-shadow: 0 12px 60px var(--shadow), 0 0 80px var(--shadow-p);
+    position: relative;
+    overflow: hidden;
+  }
+  .upwork-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(ellipse, rgba(155,109,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .upwork-left h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+    color: var(--off-white);
+  }
+  .upwork-left p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    max-width: 420px;
+    line-height: 1.7;
+  }
+  .upwork-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--purple-light);
+  }
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #5fffaa;
+    box-shadow: 0 0 8px #5fffaa;
+    animation: pulse-g 2s ease-in-out infinite;
+  }
+  .card-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+  @keyframes pulse-g {
+    0%,100% { box-shadow: 0 0 4px #5fffaa; }
+    50% { box-shadow: 0 0 14px #5fffaa; }
+  }
+  .upwork-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+  .u-stat { text-align: center; }
+  .u-stat-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    display: block;
+    letter-spacing: -0.04em;
+    color: var(--off-white);
+  }
+  .u-stat-lbl { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg-2); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .contact-left h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--off-white);
+  }
+  .contact-left p {
+    color: var(--text-body);
+    font-size: 0.975rem;
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--off-white);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .contact-link:hover {
+    border-color: var(--border-2);
+    background: var(--surface-2);
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px var(--shadow-p);
+  }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    background: rgba(155,109,255,0.12);
+    color: var(--purple-light);
+    border: 1px solid rgba(155,109,255,0.18);
+  }
+  .contact-right {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 32px var(--shadow);
+  }
+  .form-row { margin-bottom: 20px; }
+  .form-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .form-input, .form-textarea {
+    width: 100%;
+    background: var(--bg-3);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--off-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); opacity: 0.5; }
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--purple);
+    background: var(--bg-2);
+    box-shadow: 0 0 0 3px rgba(155,109,255,0.12);
+  }
+  .form-textarea { min-height: 120px; resize: vertical; }
+  .form-btn {
+    width: 100%;
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: -0.01em;
+    box-shadow: 0 4px 20px var(--shadow-p);
+  }
+  .form-btn:hover { background: var(--purple-light); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(155,109,255,0.35); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer p { color: var(--text-muted); font-size: 0.85rem; }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--purple-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 20px; padding-right: 20px; }
+    .stats-strip { padding: 24px 20px; flex-wrap: wrap; gap: 24px; }
+    .stat { border-right: none; padding: 0; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .upwork-card { padding: 28px; }
+    footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+    .hero-terminal { flex-wrap: wrap; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── DIVIDER LINE ── */
+  .purple-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Nikunj Gajera</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#upwork">Upwork</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Available for new projects
+    </div>
+    <div class="hero-terminal">
+      <div class="terminal-dots">
+        <span class="d1"></span><span class="d2"></span><span class="d3"></span>
+      </div>
+      <span class="prompt">~</span>&nbsp;
+      <span class="cmd">Full Stack Developer · SaaS · AI Engineer</span>
+      <span class="cursor"></span>
+    </div>
+    <h1 class="hero-name">
+      Building software<br>that <span class="highlight">actually ships.</span>
+    </h1>
+    <p class="hero-title">
+      I'm <strong>Nikunj</strong> — crafting production-ready SaaS platforms,<br>
+      AI-powered products, and full-stack web applications.
+    </p>
+    <div class="hero-tags">
+      <span class="tag active">Next.js</span>
+      <span class="tag active">NestJS</span>
+      <span class="tag active">React</span>
+      <span class="tag active">Node.js</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">PostgreSQL</span>
+      <span class="tag">OpenAI</span>
+      <span class="tag">AWS</span>
+      <span class="tag">Prisma</span>
+      <span class="tag">Docker</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">View My Work ↓</a>
+      <a href="https://github.com/nikunj-05122" target="_blank" class="btn-secondary">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat">
+    <span class="stat-number">5<span>+</span></span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">30<span>+</span></span>
+    <span class="stat-label">Projects Deployed</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">25<span>+</span></span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">100<span>%</span></span>
+    <span class="stat-label">Client Satisfaction</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow">About me</div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+
+        <h2 class="section-title">
+          Code with purpose,<br>
+          ship with precision.
+        </h2>
+      
+        <p>
+          I'm a Full Stack Developer with 5+ years of experience building SaaS products,
+          AI-powered applications, customer portals, CRM systems, and scalable web platforms.
+        </p>
+      
+        <p>
+          I specialize in developing end-to-end solutions using Next.js, React,
+          TypeScript, NestJS, and Node.js, with a strong focus on clean architecture,
+          performance, and long-term maintainability.
+        </p>
+
+        <p>
+          I believe great software isn't just about writing code it's about solving
+          problems, creating business value, and delivering products that continue
+          to perform long after deployment.
+        </p>
+      
+        <div style="margin-top:28px;">
+          <a href="https://www.upwork.com/freelancers/~0192b9a00c223a19b9" target="_blank" class="btn-primary" style="display:inline-flex;"> View Upwork Profile → </a>
+        </div>
+      </div>
+     
+        <div class="video-wrapper">
+          <video
+            controls
+            loop
+            playsinline
+            preload="metadata"
+            poster="./profile.jpg"
+          >
+            <source src="./Aperions Mockup 26/introduction.mp4" type="video/mp4">
+          </video>
+      
+        </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="purple-line"></div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-eyebrow">Selected Work</div>
+    <h2 class="section-title">9+ products. Real users.</h2>
+    <p class="section-sub">Every project below is live in production — from healthcare platforms to AI-driven B2B tools.</p>
+
+    <div class="portfolio-grid">
+
+      <!-- CareAtlas -->
+      <a href="https://app.careatlas.co/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #1a0e2e, #2d1a4a, #3d2060);">
+          <img src="./Aperions Mockup 26/Atlas/Care_Atlas.jpg" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-health">Healthcare</span>
+          <div class="card-title">CareAtlas <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A healthcare navigation platform helping users find, compare, and access care providers. Built with a focus on clean UX, provider search, and real-time availability data.</p>
+          <div class="card-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">NestJS</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Maps API</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Polynine -->
+      <a href="https://www.polynine.com/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #12102a, #1e1c3a, #2a284a);">
+          <img src="./Aperions Mockup 26/poly9/ploy9.png" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-saas">Agency</span>
+          <div class="card-title">Polynine <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A tech agency website with sharp visual identity and service showcasing. Emphasizes portfolio presentation, team credibility, and client acquisition through clear CTAs.</p>
+          <div class="card-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Framer Motion</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- B2BRocket -->
+      <a href="https://www.b2brocket.ai/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #1a0e2e, #2a1650, #3a1e6e);">
+          <img src="./Aperions Mockup 26/b2b Rocket/b2b-2.jpg" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-ai">AI · B2B</span>
+          <div class="card-title">B2B Rocket <span class="card-arrow">↗</span></div>
+          <p class="card-desc">An AI-powered B2B sales automation platform. Automates outreach, lead qualification, and meeting booking with intelligent agents — replacing SDR workflows at scale.</p>
+          <div class="card-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">OpenAI</span>
+            <span class="tech-tag">NestJS</span>
+            <span class="tech-tag">CRM Integration</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Success.ai -->
+      <a href="https://www.success.ai/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #160e28, #221640, #2e1e58);">
+          <img src="./Aperions Mockup 26/Sucsses ai/success-ai1.jpg" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-ai">AI · SaaS</span>
+          <div class="card-title">Success.ai <span class="card-arrow">↗</span></div>
+          <p class="card-desc">An AI-driven cold email and lead generation platform. Features sequence automation, deliverability optimization, a massive verified contact database, and detailed campaign analytics.</p>
+          <div class="card-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">AI/ML</span>
+            <span class="tech-tag">Email API</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ozzi -->
+      <a href="https://ozzi.app/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0e0e1e, #18183a, #222256);">
+          <img src="./Aperions Mockup 26/Ozzi/ozzi3.jpg" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-saas">App · SaaS</span>
+          <div class="card-title">Ozzi <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A modern app-first SaaS platform with streamlined onboarding and feature-rich dashboard. Focuses on mobile-responsive design and real-time data interactions.</p>
+          <div class="card-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">NestJS</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">WebSockets</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Berrys -->
+      <a href="https://berrys.io/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #1a0a2e, #2a1248, #3a1a62);">
+          <img src="./Aperions Mockup 26/berrys/berry1.png" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-saas">Platform</span>
+          <div class="card-title">Berrys.io <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A dynamic web platform with clean product interactions and intuitive user flows. Built for engagement and retention with modern frontend architecture and scalable backend services.</p>
+          <div class="card-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">REST API</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- SolveOnline -->
+      <a href="https://solveonline.com/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #120e24, #1e1840, #2a2258);">
+          <img src="./Aperions Mockup 26/solve9/solve1.png" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-b2b">B2B · Platform</span>
+          <div class="card-title">Solve Online <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A B2B problem-solving and collaboration platform connecting businesses with expert consultants. Features project management, secure messaging, and milestone-based billing.</p>
+          <div class="card-tech">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">WebSockets</span>
+            <span class="tech-tag">Stripe</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- CostPilot -->
+      <a href="https://app.costpilot.us/" target="_blank" class="project-card reveal">
+        <div class="card-preview" style="background: linear-gradient(135deg, #0e0c20, #1a183a, #262452);">
+          <img src="./Aperions Mockup 26/WastLense/costpilot6.jpg" alt="" >
+        </div>
+        <div class="card-body">
+          <span class="card-category cat-saas">FinTech · SaaS</span>
+          <div class="card-title">CostPilot <span class="card-arrow">↗</span></div>
+          <p class="card-desc">A cloud cost optimization SaaS that analyzes spend across AWS, Azure, and GCP — surfaces savings opportunities, generates budget alerts, and tracks optimization progress over time.</p>
+          <div class="card-tech">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">NestJS</span>
+            <span class="tech-tag">Cloud APIs</span>
+            <span class="tech-tag">Charts</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="purple-line"></div>
+
+<!-- UPWORK SECTION -->
+<section id="upwork">
+  <div class="section-inner reveal">
+    <div class="upwork-card">
+      <div class="upwork-left">
+        <h3>Rising Talent on Upwork</h3>
+        <p>I'm active on Upwork and ready to take on new projects. Whether you need a SaaS MVP, an AI integration, or a full-stack team augmentation — let's talk.</p>
+        <div class="upwork-badge">
+          <span class="badge-dot"></span>
+          Available for new contracts
+        </div>
+        <div style="margin-top: 28px;">
+          <a href="https://www.upwork.com/freelancers/~0192b9a00c223a19b9" target="_blank" class="btn-primary">
+            View Upwork Profile →
+          </a>
+        </div>
+      </div>
+      <div class="upwork-stats">
+        <div class="u-stat">
+          <span class="u-stat-val">Rising</span>
+          <span class="u-stat-lbl">Talent Badge</span>
+        </div>
+        <div class="u-stat">
+          <span class="u-stat-val">$18/hr</span>
+          <span class="u-stat-lbl">Starting Rate</span>
+        </div>
+        <div class="u-stat">
+          <span class="u-stat-val">100%</span>
+          <span class="u-stat-lbl">Job Success</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2>Let's build something great together.</h2>
+        <p>Have a project in mind? Whether it's a SaaS startup, an AI product, or a complex web platform — I'm here to help you ship it. Reach out through any channel below.</p>
+        <div class="contact-links">
+          <a href="https://github.com/nikunj-05122" target="_blank" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; color: var(--off-white);">GitHub</div>
+              <div style="font-size:0.8rem; color: var(--text-muted);">github.com/nikunj-05122</div>
+            </div>
+          </a>
+          <a href="https://www.upwork.com/freelancers/~0192b9a00c223a19b9" target="_blank" class="contact-link">
+            <div class="contact-link-icon">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.546-1.405 0-2.543-1.14-2.545-2.546V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; color: var(--off-white);">Upwork Profile</div>
+              <div style="font-size:0.8rem; color: var(--text-muted);">Rising Talent · Full Stack Dev</div>
+            </div>
+          </a>
+          <!-- <a href="mailto:nikunjg@example.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            <div>
+              <div style="font-weight:600; font-size:0.9rem; color: var(--off-white);">Email Me</div>
+              <div style="font-size:0.8rem; color: var(--text-muted);">Get a response within 24 hours</div>
+            </div>
+          </a> -->
+        </div>
+      </div>
+      <div class="contact-right reveal">
+
+        <h3 style="font-family: 'Space Grotesk'; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">
+          Send a message
+        </h3>
+        
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">
+          Tell me about your project and I'll get back to you.
+        </p>
+      
+        <form id="contact-form">
+      
+          <div class="form-row">
+            <label class="form-label">Your Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-input"
+              placeholder="John Smith"
+              required>
+          </div>
+          
+          <div class="form-row">
+            <label class="form-label">Email Address</label>
+            <input
+            type="email"
+            name="email"
+            class="form-input"
+            placeholder="john@company.com"
+            required>
+          </div>
+          
+          <div class="form-row">
+            <label class="form-label">Project Details</label>
+            <textarea
+            name="project_details"
+            class="form-textarea"
+            required></textarea>
+          </div>
+      
+          <button type="submit" class="form-btn" id="submitBtn">
+            Send Message →
+          </button>
+      
+        </form>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- <footer>
+  <p>© 2024 Nikunj G. — Built with Next.js, shipped with care.</p>
+  <nav class="footer-nav">
+    <a href="https://github.com/nikunj-05122" target="_blank">GitHub</a>
+    <a href="https://www.upwork.com/freelancers/~0192b9a00c223a19b9" target="_blank">Upwork</a>
+    <a href="#portfolio">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</footer> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('#main-nav').style.background =
+      window.scrollY > 20 ? 'rgba(14,13,18,0.97)' : 'rgba(14,13,18,0.82)';
+  });
+
+  emailjs.init("lR_zv8zkAvx4txt50");
+  
+  document
+    .getElementById("contact-form")
+    .addEventListener("submit", function (e) {
+
+      e.preventDefault();
+
+      const btn = document.getElementById("submitBtn");
+      btn.innerHTML = "Sending...";
+      btn.disabled = true;
+      
+      emailjs.sendForm(
+        "service_lc4b3vg",
+        "template_mk33dgw",
+        this
+      )
+      .then(() => {
+        alert("✅ Message sent successfully!");
+
+        this.reset();
+
+        btn.innerHTML = "Send Message →";
+        btn.disabled = false;
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+
+        alert(
+          `❌ Failed to send message.\n\nStatus: ${error.status}\nText: ${error.text}`
+        );
+
+        btn.innerHTML = "Send Message →";
+        btn.disabled = false;
+      });
+    });
+</script>
+
+</body>
+</html>
